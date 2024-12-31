@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incident Details{% endblock %}
+
+{% block body %}
+    <h1>Incident Details</h1>
+
+    <table class="table mt-3">
+        <tr>
+            <th>Incident ID</th>
+            <td>{{ incident.incidentId }}</td>
+        </tr>
+        <tr>
+            <th>Entity Type </th>
+            <td>{{ incident.entityType }}</td>
+        </tr>
+        <tr>
+            <th>Details</th>
+            <td>{{ incident.incidentDetails }}</td>
+        </tr>
+        <tr>
+            <th>Priority</th>
+            <td>{{ incident.priority }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ incident.status.value }}</td>
+        </tr>
+        <tr>
+            <th>Reported Date</th>
+            <td>{{ incident.reportedDate ? incident.reportedDate|date('Y-m-d H:i') : 'N/A' }}</td>
+        </tr>
+        <tr>
+            <th>Reporter</th>
+            <td>{{ incident.reporter.firstName }} {{ incident.reporter.lastName }}</td>
+        </tr>
+    </table>
+
+    <a href="{{ path('incident_edit', {'id': incident.id}) }}" class="btn btn-warning">Edit</a>
+    <a href="{{ path('incident_index') }}" class="btn btn-secondary">Back to list</a>
+{% endblock %}

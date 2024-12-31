@@ -1,0 +1,7 @@
+# step 1: Download this zip and open this in xampp (php enviroment) and extract.
+# step 2: Go to project root directory and run "composer install" in command line (make sure composer is globally installed in your computer).
+# step 3: After installation "inc_management" sql file for DB. Import these into DB
+# step 4: In root directory "php -S localhost:8000 -t public" execute this command for server enviroment.
+# open http://localhost:8000/ on browser
+# http://localhost:8000/register  - for user register
+	

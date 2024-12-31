@@ -1,0 +1,38 @@
+security:
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/ 
+            security: false
+
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\LoginAuthenticator
+            logout:
+                path: app_logout
+                target: app_login
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+
+    access_control:
+        # Allow unauthenticated users to access the login and register pages
+        # - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Block authenticated users from accessing login or register pages
+        # - { path: ^/login|^/register$, roles: ROLE_USER, allow_if: "false" }
+
+        # Restrict all other routes to authenticated users
+        # - { path: ^/, roles: ROLE_USER }

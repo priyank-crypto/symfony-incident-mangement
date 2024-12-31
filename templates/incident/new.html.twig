@@ -1,0 +1,60 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ incident.id ? 'Edit Incident' : 'Create Incident' }}{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5">{{ incident.id ? 'Edit Incident' : 'Create Incident' }}</h1>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+            {% if incident.status.value == 'closed' %}
+                    <div class="alert alert-warning">
+                        This incident is closed and cannot be edited.
+                    </div>
+                {% else %}
+
+                {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_row(form.entityType) }}
+                </div>    
+
+                <div class="mb-3">
+                    {{ form_row(form.incidentDetails, {'attr': {'class': 'form-control', 'placeholder': 'Enter Incident Details'}}) }}
+                </div>
+                
+                <div class="mb-3">
+                    {{ form_row(form.reportedDate, {'attr': {'class': 'form-control', 'placeholder': 'Select Reported Date'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(form.priority, {'attr': {'class': 'form-select', 'list': 'priority-list', 'placeholder': 'Select or type priority'}}) }}
+                    <datalist id="priority-list">
+                        <option value="High">
+                        <option value="Medium">
+                        <option value="Low">
+                    </datalist>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(form.status, {'attr': {'class': 'form-select'}}) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(form.reporter, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+                </div>
+
+                <div class="form-group text-center">
+                    {% if incident.id %}
+                        <button class="btn btn-primary" type="submit">Update Incident</button>
+                    {% else %}
+                        <button class="btn btn-primary" type="submit">Create Incident</button>
+                    {% endif %}
+                </div>
+                {{ form_end(form) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
